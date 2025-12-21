@@ -1,0 +1,17 @@
+# Robots.txt for Xiron
+# https://xiron.app
+
+User-agent: *
+
+# Block private/auth pages
+Disallow: /dashboard
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /reset-password
+
+# Block API routes
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://xiron.app/sitemap.xml

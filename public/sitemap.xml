@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
+  <url>
+    <loc>https://xiron.app/</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Features Page -->
+  <url>
+    <loc>https://xiron.app/features</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Blog Pages -->
+  <url>
+    <loc>https://xiron.app/blog</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://xiron.app/blog/how-to-write-better-ai-coding-prompts</loc>
+    <lastmod>2024-12-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://xiron.app/blog/reduce-ai-coding-costs-80-percent</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://xiron.app/blog/system-architecture-best-practices-2024</loc>
+    <lastmod>2024-12-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Use Case Pages -->
+  <url>
+    <loc>https://xiron.app/use-cases/cursor-ai-blueprint-generator</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://xiron.app/use-cases/blueprint-generator-for-students</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://xiron.app/use-cases/freelance-developer-blueprint-tool</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://xiron.app/use-cases/saas-architecture-generator</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://xiron.app/use-cases/reduce-ai-coding-costs</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Legal/Info Pages -->
+  <url>
+    <loc>https://xiron.app/aboutus</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://xiron.app/contact</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://xiron.app/terms</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://xiron.app/privacy</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>
+    
