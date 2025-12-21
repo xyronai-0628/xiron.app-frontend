@@ -1459,8 +1459,15 @@ function Dashboard({ user }) {
             {isLoading && (
                 <div className="loading-overlay">
                     <div className="loading-content">
-                        <div className="loading-spinner-large"></div>
-                        <p>Generating your {currentTool?.name || 'document'}...</p>
+                        <div className="space-loader">
+                            <div className="earth">
+                                <div className="earth-surface"></div>
+                            </div>
+                            <div className="moon-orbit">
+                                <div className="moon"></div>
+                            </div>
+                        </div>
+                        <p className="space-loading-text">Generating your {currentTool?.name || 'document'}...</p>
                         <p className="loading-subtext">This may take a few moments</p>
                     </div>
                 </div>
