@@ -31,7 +31,7 @@ function AboutUs() {
                             <h2 className="about-card-title">About Me</h2>
 
                             <p className="about-card-text">
-                                Hello 😉, I'm Sri Gowtham G — an aspiring entrepreneur, founder, and tech builder driven by one simple thing: solving real problems using new technology.
+                                Hello, I'm Sri Gowtham G — an aspiring entrepreneur, founder, and tech builder driven by one simple thing: solving real problems using new technology.
                             </p>
                             <p className="about-card-text">
                                 I've always been obsessed with understanding why things are hard and how they can be made simpler. That curiosity pushed me toward technology, and eventually toward building products — even before I had formal experience or a team.
