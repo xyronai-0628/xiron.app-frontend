@@ -199,7 +199,7 @@ function Pricing() {
                 handler: async function (response) {
                     // Step 3: Verify payment
                     try {
-                        const verifyResponse = await fetch('http://localhost:3001/api/verify-payment', {
+                        const verifyResponse = await fetch('https://xiron-app.onrender.com/api/verify-payment', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -287,7 +287,7 @@ function Pricing() {
                 return
             }
 
-            const response = await fetch('http://localhost:3001/api/change-plan', {
+            const response = await fetch('https://xiron-app.onrender.com/api/change-plan', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

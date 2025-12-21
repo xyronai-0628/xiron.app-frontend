@@ -12,7 +12,7 @@ const tools = [
         color: 'blue',
         gradient: 'from-blue-500 to-blue-600',
         enabled: true,
-        apiUrl: 'http://localhost:3001/api/generate-architecture',
+        apiUrl: 'https://xiron-app.onrender.com/api/generate-architecture',
         resultKey: 'architecture'
     },
     {
@@ -23,7 +23,7 @@ const tools = [
         color: 'purple',
         gradient: 'from-purple-500 to-purple-600',
         enabled: true,
-        apiUrl: 'http://localhost:3001/api/generate-userflow',
+        apiUrl: 'https://xiron-app.onrender.com/api/generate-userflow',
         resultKey: 'userflow'
     },
     {
@@ -34,7 +34,7 @@ const tools = [
         color: 'green',
         gradient: 'from-green-500 to-green-600',
         enabled: true,
-        apiUrl: 'http://localhost:3001/api/generate-database',
+        apiUrl: 'https://xiron-app.onrender.com/api/generate-database',
         resultKey: 'schema'
     },
     {
@@ -45,7 +45,7 @@ const tools = [
         color: 'orange',
         gradient: 'from-orange-500 to-orange-600',
         enabled: true,
-        apiUrl: 'http://localhost:3001/api/generate-prd',
+        apiUrl: 'https://xiron-app.onrender.com/api/generate-prd',
         resultKey: 'prd'
     }
 ]
@@ -482,7 +482,7 @@ function Dashboard({ user }) {
                 return
             }
 
-            const response = await fetch('http://localhost:3001/api/generate-bundle', {
+            const response = await fetch('https://xiron-app.onrender.com/api/generate-bundle', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
