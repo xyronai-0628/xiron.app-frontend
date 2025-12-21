@@ -6926,31 +6926,32 @@ select:focus-visible {
   justify-content: space-between;
   padding: 20px 24px;
   border-bottom: 1px solid #e5e7eb;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #ffffff;
 }
 
 .settings-sidebar-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
   margin: 0;
 }
 
 .settings-sidebar-close {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 8px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
   padding: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #6b7280;
   transition: all 0.2s;
 }
 
 .settings-sidebar-close:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #e5e7eb;
+  color: #374151;
 }
 
 /* Sidebar content */
@@ -6992,12 +6993,12 @@ select:focus-visible {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #374151;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: white;
 }
 
@@ -7035,7 +7036,7 @@ select:focus-visible {
 }
 
 .settings-user-plan.plan-badge-pro {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  background: #fef3c7;
   color: #92400e;
 }
 
@@ -7045,31 +7046,31 @@ select:focus-visible {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  background: #f9fafb;
   border-radius: 12px;
-  border: 1px solid #bae6fd;
+  border: 1px solid #e5e7eb;
 }
 
 .settings-credits-value {
-  font-size: 36px;
-  font-weight: 800;
-  color: #0369a1;
+  font-size: 32px;
+  font-weight: 700;
+  color: #111827;
   line-height: 1;
 }
 
 .settings-credits-label {
   font-size: 13px;
-  color: #0284c7;
+  color: #6b7280;
   margin-top: 4px;
 }
 
 .settings-upgrade-button {
   width: 100%;
   padding: 12px 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #111827;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -7077,8 +7078,7 @@ select:focus-visible {
 }
 
 .settings-upgrade-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  background: #1f2937;
 }
 
 /* Link buttons */
@@ -7251,12 +7251,12 @@ select:focus-visible {
 .settings-plan-action-btn {
   flex: 1;
   padding: 10px 12px;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #111827;
   color: white;
   border: none;
 }
@@ -7268,8 +7268,7 @@ select:focus-visible {
 }
 
 .settings-plan-action-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  background: #1f2937;
 }
 
 .settings-plan-action-btn.secondary:hover {
@@ -7296,7 +7295,7 @@ select:focus-visible {
 
 .settings-credits-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+  background: #374151;
   border-radius: 4px;
   transition: width 0.5s ease;
 }
