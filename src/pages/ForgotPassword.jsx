@@ -168,7 +168,7 @@ function ForgotPassword() {
                                 fontSize: '14px',
                                 color: '#f59e0b'
                             }}>
-                                ⚠️ You have {resetsRemaining} password reset{resetsRemaining !== 1 ? 's' : ''} remaining on your account.
+                                Note: You have {resetsRemaining} password reset{resetsRemaining !== 1 ? 's' : ''} remaining on your account.
                             </div>
                         )}
 

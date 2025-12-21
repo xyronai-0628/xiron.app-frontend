@@ -239,7 +239,7 @@ function Home({ user }) {
 
             {/* Animated Stats */}
             <div className="home-stats-wrapper">
-              <div className="home-stats-label">🎯 2025 Target</div>
+              <div className="home-stats-label">2025 Target</div>
               <div className="home-stats">
                 <div className="home-stat-item">
                   <div className="home-stat-number">{stats.projects.toLocaleString()}+</div>

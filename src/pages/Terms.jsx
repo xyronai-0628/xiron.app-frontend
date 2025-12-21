@@ -122,7 +122,7 @@ function Terms() {
                         <p>These Terms are governed by the laws of India.</p>
 
                         <h2>12. Contact</h2>
-                        <p>📧 <a href="mailto:xyron.company@gmail.com">xyron.company@gmail.com</a></p>
+                        <p>Email: <a href="mailto:xyron.company@gmail.com">xyron.company@gmail.com</a></p>
                     </div>
                 </div>
             </div>

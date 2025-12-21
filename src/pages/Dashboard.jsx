@@ -569,7 +569,7 @@ function Dashboard({ user }) {
             }
 
             setBundleResult(data)
-            alert(`🎉 Developer Bundle generated successfully!\n\n4 documents created:\n• PRD\n• System Architecture\n• Database Schema\n• User Flow\n\nCheck your history to view them.`)
+            alert(`Developer Bundle generated successfully!\n\n4 documents created:\n• PRD\n• System Architecture\n• Database Schema\n• User Flow\n\nCheck your history to view them.`)
 
             // Reset form
             setProjectName('')
@@ -875,9 +875,6 @@ function Dashboard({ user }) {
                         </div>
                         <div className="dashboard-user-section">
                             <span className={`dashboard-plan-badge plan-badge-${userPlan}`}>
-                                {userPlan === 'pro' && '👑 '}
-                                {userPlan === 'starter' && '🚀 '}
-                                {userPlan === 'free' && '⭐ '}
                                 {PLAN_FEATURES[userPlan]?.name || 'Free'}
                             </span>
                             <button className="dashboard-credits-button">
@@ -937,7 +934,7 @@ function Dashboard({ user }) {
                     <div className="settings-sidebar-content">
                         {/* Account Profile Section */}
                         <div className="settings-section">
-                            <div className="settings-section-label">👤 Account Profile</div>
+                            <div className="settings-section-label">Account Profile</div>
                             <div className="settings-user-info">
                                 <div className="settings-user-avatar">
                                     {user?.email?.charAt(0).toUpperCase() || 'U'}
@@ -953,13 +950,10 @@ function Dashboard({ user }) {
 
                         {/* Subscription & Billing Section */}
                         <div className="settings-section">
-                            <div className="settings-section-label">💳 Subscription & Billing</div>
+                            <div className="settings-section-label">Subscription & Billing</div>
                             <div className="settings-plan-card">
                                 <div className="settings-plan-header">
                                     <span className={`settings-plan-name plan-badge-${userPlan}`}>
-                                        {userPlan === 'pro' && '👑 '}
-                                        {userPlan === 'starter' && '🚀 '}
-                                        {userPlan === 'free' && '⭐ '}
                                         {PLAN_FEATURES[userPlan]?.name || 'Free'} Plan
                                     </span>
                                     <span className="settings-plan-status">Active</span>
@@ -986,7 +980,7 @@ function Dashboard({ user }) {
                                             navigate('/pricing')
                                         }}
                                     >
-                                        🚀 Upgrade Plan
+                                        Upgrade Plan
                                     </button>
                                 ) : (
                                     <>
@@ -1015,7 +1009,7 @@ function Dashboard({ user }) {
 
                         {/* Usage & Credits Section */}
                         <div className="settings-section">
-                            <div className="settings-section-label">📊 Usage & Credits</div>
+                            <div className="settings-section-label">Usage & Credits</div>
                             <div className="settings-credits-display">
                                 <div className="settings-credits-main">
                                     <span className="settings-credits-value">{userCredits}</span>
@@ -1035,7 +1029,7 @@ function Dashboard({ user }) {
 
                         {/* Data & Privacy Section */}
                         <div className="settings-section">
-                            <div className="settings-section-label">🔒 Data & Privacy</div>
+                            <div className="settings-section-label">Data & Privacy</div>
                             <button
                                 className="settings-link-button"
                                 onClick={handleSignOut}
@@ -1059,7 +1053,7 @@ function Dashboard({ user }) {
                             ) : (
                                 <div className="settings-delete-confirm">
                                     <div className="settings-delete-warning">
-                                        ⚠️ This will permanently delete all your data!
+                                        This will permanently delete all your data!
                                     </div>
                                     <div className="settings-delete-actions">
                                         <button
@@ -1746,7 +1740,7 @@ Examples:
                                     <path d="M8 4V8L10.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                                 </svg>
                                 {freeUpdatesRemaining > 0 ? (
-                                    <span>🎉 This update is FREE! ({freeUpdatesRemaining} free update{freeUpdatesRemaining > 1 ? 's' : ''} remaining)</span>
+                                    <span>This update is FREE! ({freeUpdatesRemaining} free update{freeUpdatesRemaining > 1 ? 's' : ''} remaining)</span>
                                 ) : (
                                     <span>This update will cost {UPDATE_CREDIT_COST} credits (You have {userCredits} credits)</span>
                                 )}
@@ -1797,7 +1791,7 @@ Examples:
                             </svg>
                         </button>
 
-                        <div className="upgrade-modal-icon">🔒</div>
+                        <div className="upgrade-modal-icon"></div>
                         <h2 className="modal-title">Upgrade Required</h2>
                         <p className="modal-subtitle">
                             {upgradeFeature === 'download' && 'Download reports is available on Starter and Pro plans.'}
@@ -1809,20 +1803,20 @@ Examples:
                             <div className="upgrade-plan-card">
                                 <h4>Starter - ₹149</h4>
                                 <ul>
-                                    <li>✅ 100 credits/month</li>
-                                    <li>✅ Download reports</li>
-                                    <li>✅ Update reports (1 free)</li>
-                                    <li>❌ Developer Bundle</li>
+                                    <li>• 100 credits/month</li>
+                                    <li>• Download reports</li>
+                                    <li>• Update reports (1 free)</li>
+                                    <li>• Developer Bundle - No</li>
                                 </ul>
                             </div>
                             <div className="upgrade-plan-card upgrade-plan-recommended">
                                 <span className="recommended-badge">Recommended</span>
                                 <h4>Pro - ₹299</h4>
                                 <ul>
-                                    <li>✅ 200 credits/month</li>
-                                    <li>✅ Download reports</li>
-                                    <li>✅ Update reports (3 free)</li>
-                                    <li>✅ Developer Bundle</li>
+                                    <li>• 200 credits/month</li>
+                                    <li>• Download reports</li>
+                                    <li>• Update reports (3 free)</li>
+                                    <li>• Developer Bundle</li>
                                 </ul>
                             </div>
                         </div>
@@ -1849,7 +1843,7 @@ Examples:
                             </svg>
                         </button>
 
-                        <h2 className="modal-title">🚀 Developer Bundle {bundleStep === 1 ? '(Step 1/2)' : '(Step 2/2)'}</h2>
+                        <h2 className="modal-title">Developer Bundle {bundleStep === 1 ? '(Step 1/2)' : '(Step 2/2)'}</h2>
                         <p className="modal-subtitle">
                             {bundleStep === 1
                                 ? 'First, tell us about your project idea in detail.'

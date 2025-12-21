@@ -37,7 +37,7 @@ function Privacy() {
                             <li>Payment information (processed via Razorpay)</li>
                         </ul>
                         <div className="policy-warning">
-                            <p>⚠️ We do not store card or bank details.</p>
+                            <p>Note: We do not store card or bank details.</p>
                         </div>
 
                         <h2>2. How We Use Data</h2>

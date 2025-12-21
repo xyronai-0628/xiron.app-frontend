@@ -309,7 +309,7 @@ function Pricing() {
             setDowngradeTarget(null)
 
             // Show success message
-            alert(`✅ ${data.message}\n\nYour new credit balance: ${data.newCredits}`)
+            alert(`${data.message}\n\nYour new credit balance: ${data.newCredits}`)
 
         } catch (err) {
             console.error('Downgrade error:', err)
@@ -340,10 +340,10 @@ function Pricing() {
                     {currentUserPlan && (
                         <div className="current-plan-indicator">
                             <span className="current-plan-badge">
-                                📌 Your current plan: <strong>{currentUserPlan.charAt(0).toUpperCase() + currentUserPlan.slice(1)}</strong>
+                                Your current plan: <strong>{currentUserPlan.charAt(0).toUpperCase() + currentUserPlan.slice(1)}</strong>
                             </span>
                             <span className="current-credits-badge">
-                                💳 Credits: <strong>{userCredits}</strong>
+                                Credits: <strong>{userCredits}</strong>
                             </span>
                         </div>
                     )}
@@ -473,7 +473,7 @@ function Pricing() {
                                     <path d="M20 32L28 40L44 24" stroke="#10B981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </div>
-                            <h2 className="payment-success-title">Payment Successful! 🎉</h2>
+                            <h2 className="payment-success-title">Payment Successful!</h2>
                             <p className="payment-success-message">
                                 <strong>{selectedPlan?.credits} credits</strong> have been added to your account.
                             </p>
@@ -497,7 +497,7 @@ function Pricing() {
                             </svg>
                         </button>
 
-                        <div className="downgrade-modal-icon">⚠️</div>
+                        <div className="downgrade-modal-icon"></div>
                         <h2 className="modal-title">Confirm Downgrade</h2>
 
                         <div className="downgrade-info">
@@ -511,7 +511,7 @@ function Pricing() {
 
                             {downgradeTarget.id === 'free' ? (
                                 <div className="downgrade-warning">
-                                    <div className="warning-icon">🚨</div>
+                                    <div className="warning-icon"></div>
                                     <div className="warning-content">
                                         <strong>Warning: You will lose all your credits!</strong>
                                         <p>Downgrading to Free will reset your credits to 50. Your current {userCredits} credits will be lost.</p>
@@ -519,7 +519,7 @@ function Pricing() {
                                 </div>
                             ) : (
                                 <div className="downgrade-info-box">
-                                    <div className="info-icon">✨</div>
+                                    <div className="info-icon"></div>
                                     <div className="info-content">
                                         <strong>Your credits will roll over!</strong>
                                         <p>You'll keep your existing {userCredits} credits and get an additional {downgradeTarget.credits} from the {downgradeTarget.name} plan.</p>

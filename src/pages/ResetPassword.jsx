@@ -397,7 +397,7 @@ function ResetPassword() {
                                     className="new-password-toggle"
                                     onClick={() => setShowPassword(!showPassword)}
                                 >
-                                    {showPassword ? '👁️' : '👁️‍🗨️'}
+                                    {showPassword ? 'Hide' : 'Show'}
                                 </button>
                             </div>
                             {errors.password && <span className="new-form-error">{errors.password}</span>}
@@ -453,7 +453,7 @@ function ResetPassword() {
                                     className="new-password-toggle"
                                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                 >
-                                    {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
+                                    {showConfirmPassword ? 'Hide' : 'Show'}
                                 </button>
                             </div>
                             {errors.confirmPassword && <span className="new-form-error">{errors.confirmPassword}</span>}

@@ -27,7 +27,7 @@ function Contact() {
                         <p>Have questions, feedback, or need assistance? Reach out to us anytime.</p>
 
                         <div className="contact-email-box">
-                            <div className="contact-email-icon">📧</div>
+                            <div className="contact-email-icon"></div>
                             <div className="contact-email-content">
                                 <p className="contact-email-label">Email Us</p>
                                 <a href="mailto:xyron.company@gmail.com" className="contact-email-link">
