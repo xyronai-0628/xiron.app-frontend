@@ -173,7 +173,7 @@ function Pricing() {
             }
 
             // Step 1: Create Razorpay order
-            const orderResponse = await fetch('http://localhost:3001/api/create-order', {
+            const orderResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/create-order`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
