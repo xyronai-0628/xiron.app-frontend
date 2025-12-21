@@ -235,112 +235,117 @@ label {
 }
 
 .dashboard-container {
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 40px 24px;
+  padding: 48px 32px;
 }
 
 .dashboard-header {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .dashboard-title {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 600;
   color: #111827;
   margin: 0 0 8px 0;
+  letter-spacing: -0.025em;
 }
 
 .dashboard-subtitle {
-  font-size: 16px;
+  font-size: 1rem;
   color: #6b7280;
   margin: 0;
+  font-weight: 400;
 }
 
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .tool-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border: 2px solid #f3f4f6;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  border: 1px solid #e5e7eb;
 }
 
 .tool-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #e5e7eb;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-color: #d1d5db;
 }
 
 .tool-header {
-  padding: 24px;
+  padding: 20px 24px;
   color: white;
   position: relative;
   overflow: hidden;
 }
 
 .tool-header-blue {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: #1e40af;
 }
 
 .tool-header-purple {
-  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  background: #6b21a8;
 }
 
 .tool-header-green {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: #047857;
 }
 
 .tool-header-orange {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: #c2410c;
 }
 
 .tool-icon-wrapper {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .tool-icon {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   stroke: white;
 }
 
 .tool-count {
-  font-size: 36px;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 1;
   margin-bottom: 4px;
+  letter-spacing: -0.02em;
 }
 
 .tool-count-label {
-  font-size: 14px;
+  font-size: 13px;
   opacity: 0.9;
+  font-weight: 500;
 }
 
 .tool-content {
-  padding: 24px;
+  padding: 20px 24px 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .tool-title {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 1.125rem;
+  font-weight: 600;
   color: #111827;
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .tool-description {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #6b7280;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .tool-more-link {
@@ -389,26 +394,25 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: #f3f4f6;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #111827;
   border: none;
-  border-radius: 8px;
-  color: #374151;
-  font-size: 14px;
-  font-weight: 600;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s ease;
   margin-top: 8px;
 }
 
 .tool-create-button:hover:not(.disabled) {
-  background: #e5e7eb;
-  color: #111827;
+  background: #1f2937;
 }
 
 .tool-create-button.disabled {
-  opacity: 0.5;
+  background: #9ca3af;
   cursor: not-allowed;
 }
 
