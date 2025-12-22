@@ -39,8 +39,8 @@ function Pricing() {
             description: 'For your hobby projects',
             features: [
                 '50 credits per month',
-                'Basic report',
-                'Basic features',
+                'Standard report',
+                'Standard features',
             ]
         },
         {
@@ -53,8 +53,10 @@ function Pricing() {
             popular: true,
             features: [
                 '100 credits per month',
-                'deep report',
-                'downloadable report',
+                'Deep individual report',
+                'Access to standard developer bundle',
+                'Remaining credits added to next month',
+                'Downloadable report',
                 '1-free update'
             ]
         },
@@ -68,9 +70,10 @@ function Pricing() {
             features: [
                 'Everything in starter',
                 '200 credits per month',
-                'access to developer bundle',
-                'remaining credits added to next month',
-                'downloadable report',
+                'Advanced individual report',
+                'Access to advanced developer bundle',
+                'Remaining credits added to next month',
+                'Downloadable report',
                 '3-free updates'
             ]
         }
@@ -409,7 +412,19 @@ function Pricing() {
                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M13.3334 4L6.00002 11.3333L2.66669 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                                     </svg>
-                                                    {feature}
+                                                    <span className="feature-text">{feature}</span>
+                                                    {feature === 'Remaining credits added to next month' && (plan.id === 'starter' || plan.id === 'pro') && (
+                                                        <span className="feature-info-icon">
+                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
+                                                                <path d="M8 7V11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                                                                <circle cx="8" cy="5" r="0.75" fill="currentColor" />
+                                                            </svg>
+                                                            <span className="feature-info-tooltip">
+                                                                This feature only applies for upgrading plan and same plan (Starter and Pro), not for downgrading plan.
+                                                            </span>
+                                                        </span>
+                                                    )}
                                                 </li>
                                             ))}
                                         </ul>
