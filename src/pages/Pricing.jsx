@@ -46,7 +46,7 @@ function Pricing() {
         {
             id: 'starter',
             name: 'Starter',
-            price: 10, // TEMP: Original 149
+            price: 149,
             originalPrice: 299,
             credits: 100,
             description: 'Great for small projects and building prototypes',
