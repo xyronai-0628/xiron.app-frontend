@@ -3,6 +3,11 @@
 
 User-agent: *
 
+# Explicitly allow favicon crawling (for Google Search)
+Allow: /favicon*.png
+Allow: /logo.png
+Allow: /site.webmanifest
+
 # Block private/auth pages
 Disallow: /dashboard
 Disallow: /login
