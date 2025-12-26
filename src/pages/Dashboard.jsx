@@ -1183,7 +1183,7 @@ function Dashboard({ user }) {
                                         <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" fill="none" />
                                         <path d="M8 4V8L10.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                                     </svg>
-                                    <span className="credits-text">{CREDIT_COST} credits</span>
+                                    <span className="credits-text">{getCreditCost(userPlan, 'SINGLE_REPORT')} credits</span>
                                 </div>
 
                                 <button
