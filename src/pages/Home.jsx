@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import '../styles/App.css'
 import SEOHead from '../components/SEOHead'
 import SchemaMarkup, { createSoftwareApplicationSchema, createFAQSchema, createOrganizationSchema } from '../components/SchemaMarkup'
+import CountdownTimer from '../components/CountdownTimer'
 
 function Home({ user }) {
   const navigate = useNavigate()
@@ -423,6 +424,9 @@ function Home({ user }) {
             <h2 className="home-section-title">Simple, Transparent Pricing</h2>
             <p className="home-section-subtitle">Choose the plan that fits your needs</p>
           </div>
+          <div className="home-countdown-wrapper">
+            <CountdownTimer />
+          </div>
           <div className="home-pricing-grid">
             {/* Free Plan */}
             <div className="home-pricing-card">
@@ -452,15 +456,15 @@ function Home({ user }) {
                 <h3 className="home-pricing-title">Starter</h3>
                 <div className="home-pricing-launch-offer">LAUNCH OFFER</div>
                 <div className="home-pricing-price">
-                  <span className="home-pricing-original">₹299</span>
+                  <span className="home-pricing-original">₹149</span>
                   <span className="home-pricing-currency">₹</span>
-                  <span className="home-pricing-amount">149</span>
+                  <span className="home-pricing-amount">99</span>
                 </div>
                 <p className="home-pricing-billing">Per user/month</p>
               </div>
               <p className="home-pricing-description">Great for small projects and building prototypes</p>
               <ul className="home-pricing-features">
-                <li>✓ 100 credits per month</li>
+                <li>✓ 120 credits per month</li>
                 <li>✓ Deep individual report</li>
                 <li>✓ Access to Standard research developer bundle</li>
                 <li>✓ Credits roll over to next month</li>
@@ -476,16 +480,16 @@ function Home({ user }) {
                 <h3 className="home-pricing-title">Pro</h3>
                 <div className="home-pricing-launch-offer">LAUNCH OFFER</div>
                 <div className="home-pricing-price">
-                  <span className="home-pricing-original">₹599</span>
+                  <span className="home-pricing-original">₹299</span>
                   <span className="home-pricing-currency">₹</span>
-                  <span className="home-pricing-amount">299</span>
+                  <span className="home-pricing-amount">199</span>
                 </div>
                 <p className="home-pricing-billing">Per user/month</p>
               </div>
               <p className="home-pricing-description">Great for building web applications and MVP</p>
               <ul className="home-pricing-features">
                 <li>✓ Everything in starter</li>
-                <li>✓ 200 credits per month</li>
+                <li>✓ 240 credits per month</li>
                 <li>✓ Advanced individual report</li>
                 <li>✓ Access to In-depth research developer bundle</li>
                 <li>✓ Credits roll over to next month</li>

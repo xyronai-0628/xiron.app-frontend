@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/App.css'
 import { supabase } from '../lib/supabase'
+import CountdownTimer from '../components/CountdownTimer'
 
 // Credits per plan
 const PLAN_CREDITS = {
     free: 50,
-    starter: 100,
-    pro: 200
+    starter: 120,
+    pro: 240
 }
 
 // Plan hierarchy for comparison
@@ -46,13 +47,13 @@ function Pricing() {
         {
             id: 'starter',
             name: 'Starter',
-            price: 149,
-            originalPrice: 299,
-            credits: 100,
+            price: 99,
+            originalPrice: 149,
+            credits: 120,
             description: 'Great for small projects and building prototypes',
             popular: true,
             features: [
-                '100 credits per month',
+                '120 credits per month',
                 'Deep individual report',
                 'Access to standard developer bundle',
                 'Remaining credits added to next month',
@@ -63,13 +64,13 @@ function Pricing() {
         {
             id: 'pro',
             name: 'Pro',
-            price: 299,
-            originalPrice: 599,
-            credits: 200,
+            price: 199,
+            originalPrice: 299,
+            credits: 240,
             description: 'For building production grade applications and MVP',
             features: [
                 'Everything in starter',
-                '200 credits per month',
+                '240 credits per month',
                 'Advanced individual report',
                 'Access to advanced developer bundle',
                 'Remaining credits added to next month',
@@ -350,6 +351,11 @@ function Pricing() {
                             </span>
                         </div>
                     )}
+                </div>
+
+                {/* Countdown Timer */}
+                <div className="pricing-countdown-wrapper">
+                    <CountdownTimer />
                 </div>
 
                 {/* Loading State */}

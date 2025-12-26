@@ -50,8 +50,20 @@ const tools = [
     }
 ]
 
-const CREDIT_COST = 40 // Credits required per new report generation
 const UPDATE_CREDIT_COST = 10 // Credits required per report update
+
+// Plan-specific credit costs
+const PLAN_CREDIT_COSTS = {
+    free: { SINGLE_REPORT: 20, BUNDLE: 70 },
+    starter: { SINGLE_REPORT: 20, BUNDLE: 70 },
+    pro: { SINGLE_REPORT: 30, BUNDLE: 90 }
+}
+
+// Helper to get credit cost based on plan
+const getCreditCost = (plan, operation) => {
+    const planCosts = PLAN_CREDIT_COSTS[plan] || PLAN_CREDIT_COSTS.free
+    return planCosts[operation] || PLAN_CREDIT_COSTS.free[operation]
+}
 
 // Plan-based feature configuration
 const PLAN_FEATURES = {
@@ -62,25 +74,31 @@ const PLAN_FEATURES = {
         canUpdate: false,
         canUseBundle: false,
         freeUpdates: 0,
-        reportQuality: 'basic'
+        reportQuality: 'basic',
+        creditCostReport: 20,
+        creditCostBundle: 70
     },
     starter: {
         name: 'Starter',
-        monthlyCredits: 100,
+        monthlyCredits: 120,
         canDownload: true,
         canUpdate: true,
-        canUseBundle: false,
+        canUseBundle: true,
         freeUpdates: 1,
-        reportQuality: 'deep'
+        reportQuality: 'deep',
+        creditCostReport: 20,
+        creditCostBundle: 70
     },
     pro: {
         name: 'Pro',
-        monthlyCredits: 200,
+        monthlyCredits: 240,
         canDownload: true,
         canUpdate: true,
         canUseBundle: true,
         freeUpdates: 3,
-        reportQuality: 'deep'
+        reportQuality: 'deep',
+        creditCostReport: 30,
+        creditCostBundle: 90
     }
 }
 
@@ -312,9 +330,10 @@ function Dashboard({ user }) {
             return
         }
 
-        // Check if user has enough credits
-        if (userCredits < CREDIT_COST) {
-            setError(`Insufficient credits. You need ${CREDIT_COST} credits to generate a report. You have ${userCredits} credits.`)
+        // Check if user has enough credits (plan-specific)
+        const reportCost = getCreditCost(userPlan, 'SINGLE_REPORT')
+        if (userCredits < reportCost) {
+            setError(`Insufficient credits. You need ${reportCost} credits to generate a report. You have ${userCredits} credits.`)
             return
         }
 
@@ -463,9 +482,10 @@ function Dashboard({ user }) {
             return
         }
 
-        // Check credits (4x for bundle)
-        if (userCredits < CREDIT_COST * 4) {
-            setError(`Insufficient credits. You need ${CREDIT_COST * 4} credits for a bundle. You have ${userCredits} credits.`)
+        // Check credits for bundle (plan-specific)
+        const bundleCost = getCreditCost(userPlan, 'BUNDLE')
+        if (userCredits < bundleCost) {
+            setError(`Insufficient credits. You need ${bundleCost} credits for a bundle. You have ${userCredits} credits.`)
             return
         }
 
@@ -1263,7 +1283,7 @@ function Dashboard({ user }) {
                                     <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.5" fill="none" />
                                     <path d="M9 5V9L11.5 11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                                 </svg>
-                                <span>{CREDIT_COST * 4} credits</span>
+                                <span>{getCreditCost(userPlan, 'BUNDLE')} credits</span>
                             </div>
                             <button
                                 className={`bundle-generate-button ${userPlan === 'free' ? 'bundle-locked' : ''}`}
@@ -1808,19 +1828,19 @@ Examples:
 
                         <div className="upgrade-plan-comparison">
                             <div className="upgrade-plan-card">
-                                <h4>Starter - ₹149</h4>
+                                <h4>Starter - ₹99</h4>
                                 <ul>
-                                    <li>• 100 credits/month</li>
+                                    <li>• 120 credits/month</li>
                                     <li>• Download reports</li>
                                     <li>• Update reports (1 free)</li>
-                                    <li>• Developer Bundle - No</li>
+                                    <li>• Developer Bundle</li>
                                 </ul>
                             </div>
                             <div className="upgrade-plan-card upgrade-plan-recommended">
                                 <span className="recommended-badge">Recommended</span>
-                                <h4>Pro - ₹299</h4>
+                                <h4>Pro - ₹199</h4>
                                 <ul>
-                                    <li>• 200 credits/month</li>
+                                    <li>• 240 credits/month</li>
                                     <li>• Download reports</li>
                                     <li>• Update reports (3 free)</li>
                                     <li>• Developer Bundle</li>
@@ -2079,7 +2099,7 @@ Examples:
                                             ← Back
                                         </button>
                                         <button className="continue-button" onClick={handleGenerateBundle}>
-                                            Generate Bundle ({CREDIT_COST * 4} credits) →
+                                            Generate Bundle ({getCreditCost(userPlan, 'BUNDLE')} credits) →
                                         </button>
                                     </div>
                                 </>

@@ -7881,3 +7881,166 @@ select:focus-visible {
 .settings-policy-links span {
   color: #d1d5db;
 }
+
+/* ============================================
+   COUNTDOWN TIMER STYLES
+   Flip-clock style countdown for launch offer
+   ============================================ */
+
+.countdown-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.countdown-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f59e0b;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.countdown-boxes {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdown-number {
+  background: #ffffff;
+  color: #111827;
+  font-size: 2.5rem;
+  font-weight: 700;
+  padding: 16px 20px;
+  border-radius: 10px;
+  min-width: 80px;
+  text-align: center;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  position: relative;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Flip card effect - horizontal line */
+.countdown-number::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Side screws/rivets */
+.countdown-number::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  background: #d1d5db;
+  border-radius: 50%;
+  box-shadow: 
+    calc(100% + 8px) 0 0 #d1d5db;
+}
+
+.countdown-unit {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Separator dots between boxes */
+.countdown-box:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Home page specific styling */
+.home-countdown-wrapper {
+  margin-bottom: 24px;
+}
+
+.home-countdown-wrapper .countdown-timer {
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+  backdrop-filter: blur(10px);
+}
+
+/* Pricing page specific styling */
+.pricing-countdown-wrapper {
+  margin-bottom: 32px;
+}
+
+.pricing-countdown-wrapper .countdown-timer {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .countdown-timer {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .countdown-boxes {
+    gap: 10px;
+  }
+
+  .countdown-number {
+    font-size: 1.75rem;
+    padding: 12px 14px;
+    min-width: 60px;
+  }
+
+  .countdown-number::before {
+    display: none;
+  }
+
+  .countdown-unit {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .countdown-label {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-number {
+    font-size: 1.5rem;
+    padding: 10px 12px;
+    min-width: 50px;
+  }
+
+  .countdown-boxes {
+    gap: 8px;
+  }
+}
