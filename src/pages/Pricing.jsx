@@ -48,7 +48,7 @@ function Pricing() {
             id: 'starter',
             name: 'Starter',
             price: 99,
-            originalPrice: 149,
+            originalPrice: 299,
             credits: 120,
             description: 'Great for small projects and building prototypes',
             popular: true,
@@ -65,7 +65,7 @@ function Pricing() {
             id: 'pro',
             name: 'Pro',
             price: 199,
-            originalPrice: 299,
+            originalPrice: 599,
             credits: 240,
             description: 'For building production grade applications and MVP',
             features: [

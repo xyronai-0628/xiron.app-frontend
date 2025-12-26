@@ -456,7 +456,7 @@ function Home({ user }) {
                 <h3 className="home-pricing-title">Starter</h3>
                 <div className="home-pricing-launch-offer">LAUNCH OFFER</div>
                 <div className="home-pricing-price">
-                  <span className="home-pricing-original">₹149</span>
+                  <span className="home-pricing-original">₹299</span>
                   <span className="home-pricing-currency">₹</span>
                   <span className="home-pricing-amount">99</span>
                 </div>
