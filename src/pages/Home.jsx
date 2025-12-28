@@ -47,13 +47,15 @@ function Home({ user }) {
   // Schema markup data
   const softwareSchema = createSoftwareApplicationSchema({
     name: 'Xiron - AI Blueprint Generator',
-    description: 'AI-powered technical blueprint generator that creates system architectures, user flows, database schemas, and PRDs. Save 80% on AI coding credits.',
-    applicationCategory: 'DeveloperApplication',
+    description: 'AI-powered technical blueprint generator that creates system architectures, user flows, database schemas, and PRDs. Designed for software engineers and product managers to save 80% on AI coding credits.',
+    applicationCategory: ['DeveloperApplication', 'DesignApplication'],
     operatingSystem: 'Web Browser',
     offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'INR'
+      '@type': 'AggregateOffer',
+      lowPrice: '0',
+      highPrice: '199',
+      priceCurrency: 'INR',
+      offerCount: '3'
     }
   })
 
@@ -306,6 +308,10 @@ function Home({ user }) {
           <div className="home-section-header">
             <h2 className="home-section-title">Powerful Features</h2>
             <p className="home-section-subtitle">Everything you need to create professional technical documentation for vibe coding tools</p>
+            {/* Quick Answer for AI extraction */}
+            <p className="home-quick-answer" style={{ maxWidth: '800px', margin: '1rem auto 2rem', fontSize: '1rem', lineHeight: '1.6', color: 'rgba(255,255,255,0.8)' }}>
+              Xiron generates four types of AI-powered technical documentation: System Architecture (microservices, APIs, infrastructure), Database Schemas (tables, relationships, indexing), User Flows (interaction paths, decision points), and PRDs (goals, features, success metrics). Each document integrates with Cursor, Copilot, and other AI coding tools.
+            </p>
           </div>
           <div className="home-features-grid">
             <div className="home-feature-card" style={{ animationDelay: '0s' }}>

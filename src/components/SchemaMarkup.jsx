@@ -43,12 +43,25 @@ function SchemaMarkup({ schema, id = 'schema-markup' }) {
 export function createSoftwareApplicationSchema({
     name = 'Xiron',
     description = 'AI-powered technical blueprint generator for developers',
-    applicationCategory = 'DeveloperApplication',
+    applicationCategory = ['DeveloperApplication', 'DesignApplication'],
     operatingSystem = 'Web Browser',
     offers = null,
     aggregateRating = null,
-    image = '/logo.png',
-    url = 'https://xiron.app'
+    image = 'https://xiron.app/logo.png',
+    url = 'https://xiron.app',
+    featureList = [
+        'AI System Architecture Generation',
+        'Database Schema Design',
+        'PRD (Product Requirements Document) Generation',
+        'User Flow Diagram Creation',
+        'Technical Blueprint Export',
+        'Integration with AI Coding Tools (Cursor, Copilot, Windsurf)'
+    ],
+    audience = {
+        '@type': 'Audience',
+        audienceType: 'Software Engineers, Product Managers, Technical Leads, Startup Founders'
+    },
+    keywords = 'AI blueprint generator, system architecture, PRD generator, database schema, vibe coding, technical documentation'
 }) {
     const schema = {
         '@context': 'https://schema.org',
@@ -59,11 +72,16 @@ export function createSoftwareApplicationSchema({
         operatingSystem,
         url,
         image,
+        featureList,
+        audience,
+        keywords,
         author: {
             '@type': 'Organization',
             name: 'Xiron',
             url: 'https://xiron.app'
-        }
+        },
+        softwareVersion: '1.0',
+        releaseNotes: 'Generate comprehensive technical documentation for AI-assisted development workflows.'
     }
 
     if (offers) {
@@ -171,10 +189,21 @@ export function createBreadcrumbSchema(items) {
 export function createOrganizationSchema({
     name = 'Xiron',
     url = 'https://xiron.app',
-    logo = '/logo.png',
+    logo = 'https://xiron.app/logo.png',
     description = 'AI-powered technical blueprint generator helping developers create architecture, PRDs, and database schemas',
     email = 'xyron.company@gmail.com',
-    sameAs = []
+    sameAs = [],
+    foundingDate = '2024',
+    knowsAbout = [
+        'Artificial Intelligence',
+        'Software Architecture',
+        'Technical Documentation',
+        'Product Requirements',
+        'Database Design',
+        'Developer Tools',
+        'AI-Assisted Coding'
+    ],
+    areaServed = 'Worldwide'
 }) {
     return {
         '@context': 'https://schema.org',
@@ -184,7 +213,11 @@ export function createOrganizationSchema({
         logo,
         description,
         email,
-        sameAs
+        sameAs,
+        foundingDate,
+        knowsAbout,
+        areaServed,
+        slogan: 'AI-Powered Technical Blueprint Generator'
     }
 }
 

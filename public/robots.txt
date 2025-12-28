@@ -3,20 +3,26 @@
 
 User-agent: *
 
-# Explicitly allow favicon crawling (for Google Search)
+# Explicitly allow branding assets (Vital for Google Search consistency)
+Allow: /favicon.ico
 Allow: /favicon*.png
 Allow: /logo.png
 Allow: /site.webmanifest
 
-# Block private/auth pages
+# Explicitly allow AI context (Vital for GEO)
+Allow: /llms.txt
+
+# Block private/auth pages (Keep these out of Search Results)
 Disallow: /dashboard
 Disallow: /login
 Disallow: /signup
 Disallow: /forgot-password
 Disallow: /reset-password
+Disallow: /account
 
-# Block API routes
+# Block API & Next.js internals to save crawl budget
 Disallow: /api/
+Disallow: /_next/private/
 
-# Sitemap
+# Sitemaps
 Sitemap: https://xiron.app/sitemap.xml
