@@ -141,6 +141,12 @@ function Dashboard({ user }) {
     const [deleteConfirmActive, setDeleteConfirmActive] = useState(false)
     const [deleteCountdown, setDeleteCountdown] = useState(5)
 
+    // Document history UI state
+    const [searchQuery, setSearchQuery] = useState('')
+    const [filterType, setFilterType] = useState('all')
+    const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'desc' })
+    const [activeDropdown, setActiveDropdown] = useState(null)
+
     // Load documents and credits when user changes
     useEffect(() => {
         if (user) {
@@ -802,6 +808,89 @@ function Dashboard({ user }) {
         return tool?.color || 'blue'
     }
 
+    // Document history helper functions
+    const getFilteredAndSortedDocuments = () => {
+        let filtered = [...documents]
+
+        // Apply search filter
+        if (searchQuery.trim()) {
+            const query = searchQuery.toLowerCase()
+            filtered = filtered.filter(doc =>
+                doc.projectName.toLowerCase().includes(query) ||
+                doc.toolName.toLowerCase().includes(query)
+            )
+        }
+
+        // Apply type filter
+        if (filterType !== 'all') {
+            filtered = filtered.filter(doc => doc.toolId === filterType)
+        }
+
+        // Apply sorting
+        filtered.sort((a, b) => {
+            let comparison = 0
+            switch (sortConfig.key) {
+                case 'name':
+                    comparison = a.projectName.localeCompare(b.projectName)
+                    break
+                case 'type':
+                    comparison = a.toolName.localeCompare(b.toolName)
+                    break
+                case 'date':
+                default:
+                    comparison = new Date(a.createdAt) - new Date(b.createdAt)
+                    break
+            }
+            return sortConfig.direction === 'asc' ? comparison : -comparison
+        })
+
+        return filtered
+    }
+
+    const handleSort = (key) => {
+        setSortConfig(prev => ({
+            key,
+            direction: prev.key === key && prev.direction === 'asc' ? 'desc' : 'asc'
+        }))
+    }
+
+    const toggleDropdown = (docId) => {
+        setActiveDropdown(prev => prev === docId ? null : docId)
+    }
+
+    const handleShare = async (doc) => {
+        const shareText = `Check out my ${doc.toolName}: ${doc.projectName}`
+        try {
+            await navigator.clipboard.writeText(shareText)
+            alert('Link copied to clipboard!')
+        } catch {
+            alert('Failed to copy link')
+        }
+        setActiveDropdown(null)
+    }
+
+    const handleDownloadFromDropdown = (doc) => {
+        const content = doc.content || ''
+        const fileName = `${doc.projectName.replace(/[^a-z0-9]/gi, '_')}_${doc.toolId || 'document'}.md`
+        const blob = new Blob([content], { type: 'text/markdown' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = fileName
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        URL.revokeObjectURL(url)
+        setActiveDropdown(null)
+    }
+
+    // Close dropdown when clicking outside
+    const handleClickOutside = () => {
+        if (activeDropdown) {
+            setActiveDropdown(null)
+        }
+    }
+
     const loadDocuments = async (userId) => {
         if (!userId) return
 
@@ -1318,86 +1407,259 @@ function Dashboard({ user }) {
                     </div>
                 </div>
 
-                {/* History Section - Notion Style */}
-                <div className="history-section notion-style">
-                    <div className="notion-header">
-                        <h2 className="notion-title">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" fill="none" />
-                                <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                            </svg>
-                            Documents
-                        </h2>
-                        <span className="notion-count">{documents.length} items</span>
-                    </div>
+                {/* Modern Document History Section */}
+                <div className="doc-history-section" onClick={handleClickOutside}>
+                    <div className="doc-history-card">
+                        {/* Header */}
+                        <div className="doc-history-header">
+                            <div className="doc-history-title">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" fill="none" />
+                                    <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                </svg>
+                                <span>Documents</span>
+                            </div>
+                            <span className="doc-history-count">{documents.length} items</span>
+                        </div>
 
-                    {documents.length === 0 ? (
-                        <div className="notion-empty">
-                            <div className="notion-empty-icon">📄</div>
-                            <p>No documents yet</p>
-                            <span>Create your first document using the tools above</span>
+                        {/* Toolbar */}
+                        <div className="doc-history-toolbar">
+                            <div className="doc-search-wrapper">
+                                <svg className="doc-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2" />
+                                    <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                </svg>
+                                <input
+                                    type="text"
+                                    className="doc-search-input"
+                                    placeholder="Search documents..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    onClick={(e) => e.stopPropagation()}
+                                />
+                            </div>
+
+                            <div className="doc-toolbar-right">
+                                <div className="doc-filter-wrapper">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                    <select
+                                        className="doc-filter-select"
+                                        value={filterType}
+                                        onChange={(e) => setFilterType(e.target.value)}
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <option value="all">All Types</option>
+                                        <option value="architecture">System Architecture</option>
+                                        <option value="database">Database Schema</option>
+                                        <option value="userflow">User Flow</option>
+                                        <option value="prd">PRD Generator</option>
+                                    </select>
+                                </div>
+
+                                <button
+                                    className="doc-sort-button"
+                                    onClick={(e) => { e.stopPropagation(); handleSort('date'); }}
+                                    title="Sort by date"
+                                >
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 5V19M12 5L6 11M12 5L18 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                            style={{ transform: sortConfig.direction === 'asc' ? 'rotate(180deg)' : 'none', transformOrigin: 'center' }} />
+                                    </svg>
+                                    Date
+                                </button>
+                            </div>
                         </div>
-                    ) : (
-                        <div className="notion-table-wrapper">
-                            <table className="notion-table">
-                                <thead>
-                                    <tr>
-                                        <th className="notion-th notion-th-name">Name</th>
-                                        <th className="notion-th notion-th-type">Type</th>
-                                        <th className="notion-th notion-th-date">Created</th>
-                                        <th className="notion-th notion-th-actions">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {documents.map((doc) => (
-                                        <tr
-                                            key={doc.id}
-                                            className="notion-row"
-                                            onClick={() => handleViewDocument(doc)}
-                                        >
-                                            <td className="notion-td notion-td-name">
-                                                <div className="notion-name-cell">
-                                                    <span className="notion-page-icon">📄</span>
-                                                    <span className="notion-name-text">{doc.projectName}</span>
-                                                </div>
-                                            </td>
-                                            <td className="notion-td notion-td-type">
-                                                <span className={`notion-tag notion-tag-${doc.toolId}`}>
-                                                    {doc.toolName}
-                                                </span>
-                                            </td>
-                                            <td className="notion-td notion-td-date">
-                                                {formatDate(doc.createdAt)}
-                                            </td>
-                                            <td className="notion-td notion-td-actions">
-                                                <div className="notion-actions">
-                                                    <button
-                                                        className="notion-action-btn notion-view-btn"
-                                                        onClick={(e) => { e.stopPropagation(); handleViewDocument(doc); }}
-                                                        title="View"
-                                                    >
-                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z" stroke="currentColor" strokeWidth="2" fill="none" />
-                                                            <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
-                                                        </svg>
-                                                    </button>
-                                                    <button
-                                                        className="notion-action-btn notion-delete-btn"
-                                                        onClick={(e) => handleDeleteDocument(e, doc)}
-                                                        title="Delete"
-                                                    >
-                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M3 6H5H21M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
+
+                        {/* Content */}
+                        {getFilteredAndSortedDocuments().length === 0 ? (
+                            <div className="doc-empty-state">
+                                <div className="doc-empty-illustration">
+                                    <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="25" y="15" width="70" height="90" rx="8" fill="#F3F4F6" stroke="#E5E7EB" strokeWidth="2" />
+                                        <rect x="35" y="35" width="50" height="6" rx="3" fill="#D1D5DB" />
+                                        <rect x="35" y="50" width="40" height="6" rx="3" fill="#E5E7EB" />
+                                        <rect x="35" y="65" width="45" height="6" rx="3" fill="#E5E7EB" />
+                                        <rect x="35" y="80" width="35" height="6" rx="3" fill="#E5E7EB" />
+                                        <circle cx="90" cy="90" r="20" fill="#3B82F6" />
+                                        <path d="M90 82V98M82 90H98" stroke="white" strokeWidth="3" strokeLinecap="round" />
+                                    </svg>
+                                </div>
+                                <h3 className="doc-empty-title">
+                                    {searchQuery || filterType !== 'all' ? 'No matching documents' : 'No documents yet'}
+                                </h3>
+                                <p className="doc-empty-text">
+                                    {searchQuery || filterType !== 'all'
+                                        ? 'Try adjusting your search or filter criteria'
+                                        : 'Create your first document using the tools above'}
+                                </p>
+                            </div>
+                        ) : (
+                            <div className="doc-table-wrapper">
+                                <table className="doc-table">
+                                    <thead>
+                                        <tr>
+                                            <th className="doc-th doc-th-name" onClick={(e) => { e.stopPropagation(); handleSort('name'); }}>
+                                                <span>Name</span>
+                                                {sortConfig.key === 'name' && (
+                                                    <svg className={`doc-sort-indicator ${sortConfig.direction}`} width="12" height="12" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M12 5V19M12 5L6 11M12 5L18 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                    </svg>
+                                                )}
+                                            </th>
+                                            <th className="doc-th doc-th-type" onClick={(e) => { e.stopPropagation(); handleSort('type'); }}>
+                                                <span>Type</span>
+                                                {sortConfig.key === 'type' && (
+                                                    <svg className={`doc-sort-indicator ${sortConfig.direction}`} width="12" height="12" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M12 5V19M12 5L6 11M12 5L18 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                    </svg>
+                                                )}
+                                            </th>
+                                            <th className="doc-th doc-th-date" onClick={(e) => { e.stopPropagation(); handleSort('date'); }}>
+                                                <span>Created</span>
+                                                {sortConfig.key === 'date' && (
+                                                    <svg className={`doc-sort-indicator ${sortConfig.direction}`} width="12" height="12" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M12 5V19M12 5L6 11M12 5L18 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                    </svg>
+                                                )}
+                                            </th>
+                                            <th className="doc-th doc-th-actions">Actions</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    )}
+                                    </thead>
+                                    <tbody>
+                                        {getFilteredAndSortedDocuments().map((doc) => (
+                                            <tr
+                                                key={doc.id}
+                                                className="doc-table-row"
+                                                onClick={() => handleViewDocument(doc)}
+                                            >
+                                                <td className="doc-td doc-td-name">
+                                                    <div className="doc-name-cell">
+                                                        <span className={`doc-type-icon doc-type-icon-${doc.toolId}`}>
+                                                            {doc.toolId === 'architecture' && (
+                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                    <rect x="3" y="3" width="7" height="7" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                                    <rect x="14" y="3" width="7" height="7" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                                    <rect x="3" y="14" width="7" height="7" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                                    <rect x="14" y="14" width="7" height="7" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                                </svg>
+                                                            )}
+                                                            {doc.toolId === 'userflow' && (
+                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                    <circle cx="6" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                                    <circle cx="18" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                                    <path d="M9 12H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                                </svg>
+                                                            )}
+                                                            {doc.toolId === 'database' && (
+                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                    <ellipse cx="12" cy="5" rx="9" ry="3" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                                    <path d="M3 5V19" stroke="currentColor" strokeWidth="2" />
+                                                                    <path d="M21 5V19" stroke="currentColor" strokeWidth="2" />
+                                                                    <ellipse cx="12" cy="19" rx="9" ry="3" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                                </svg>
+                                                            )}
+                                                            {doc.toolId === 'prd' && (
+                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                                    <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                                </svg>
+                                                            )}
+                                                        </span>
+                                                        <span className="doc-name-text">{doc.projectName}</span>
+                                                    </div>
+                                                </td>
+                                                <td className="doc-td doc-td-type">
+                                                    <span className={`doc-type-badge doc-type-badge-${doc.toolId}`}>
+                                                        {doc.toolName.replace(' (Developer Bundle)', '')}
+                                                    </span>
+                                                </td>
+                                                <td className="doc-td doc-td-date">
+                                                    {formatDate(doc.createdAt)}
+                                                </td>
+                                                <td className="doc-td doc-td-actions">
+                                                    <div className="doc-row-actions">
+                                                        <button
+                                                            className="doc-action-btn doc-view-btn"
+                                                            onClick={(e) => { e.stopPropagation(); handleViewDocument(doc); }}
+                                                            title="View"
+                                                        >
+                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                                <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
+                                                            </svg>
+                                                        </button>
+                                                        <button
+                                                            className="doc-action-btn doc-download-btn"
+                                                            onClick={(e) => { e.stopPropagation(); handleDownloadFromDropdown(doc); }}
+                                                            title="Download"
+                                                        >
+                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                                <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                                <path d="M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                            </svg>
+                                                        </button>
+                                                        <div className="doc-dropdown-wrapper">
+                                                            <button
+                                                                className="doc-action-btn doc-more-btn"
+                                                                onClick={(e) => { e.stopPropagation(); toggleDropdown(doc.id); }}
+                                                                title="More actions"
+                                                            >
+                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                    <circle cx="12" cy="5" r="1.5" fill="currentColor" />
+                                                                    <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+                                                                    <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+                                                                </svg>
+                                                            </button>
+                                                            {activeDropdown === doc.id && (
+                                                                <div className="doc-dropdown-menu" onClick={(e) => e.stopPropagation()}>
+                                                                    <button className="doc-dropdown-item" onClick={() => { handleViewDocument(doc); setActiveDropdown(null); }}>
+                                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                            <path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z" stroke="currentColor" strokeWidth="2" />
+                                                                            <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
+                                                                        </svg>
+                                                                        View
+                                                                    </button>
+                                                                    <button className="doc-dropdown-item" onClick={() => handleDownloadFromDropdown(doc)}>
+                                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                            <path d="M21 15V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                                            <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                                            <path d="M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                                        </svg>
+                                                                        Download
+                                                                    </button>
+                                                                    <button className="doc-dropdown-item" onClick={() => handleShare(doc)}>
+                                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                            <circle cx="18" cy="5" r="3" stroke="currentColor" strokeWidth="2" />
+                                                                            <circle cx="6" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
+                                                                            <circle cx="18" cy="19" r="3" stroke="currentColor" strokeWidth="2" />
+                                                                            <path d="M8.59 13.51L15.42 17.49" stroke="currentColor" strokeWidth="2" />
+                                                                            <path d="M15.41 6.51L8.59 10.49" stroke="currentColor" strokeWidth="2" />
+                                                                        </svg>
+                                                                        Share
+                                                                    </button>
+                                                                    <div className="doc-dropdown-divider"></div>
+                                                                    <button className="doc-dropdown-item doc-dropdown-item-danger" onClick={(e) => { handleDeleteDocument(e, doc); setActiveDropdown(null); }}>
+                                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                            <path d="M3 6H5H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                                            <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                                        </svg>
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
 
