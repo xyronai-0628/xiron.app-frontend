@@ -5153,8 +5153,15 @@ html {
 }
 
 @keyframes floatUpDown {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .doc-empty-title {
@@ -5214,14 +5221,24 @@ html {
   transform: rotate(180deg);
 }
 
-.doc-th-name { width: 35%; }
-.doc-th-type { width: 25%; }
-.doc-th-date { width: 25%; }
-.doc-th-actions { 
-  width: 15%; 
+.doc-th-name {
+  width: 35%;
+}
+
+.doc-th-type {
+  width: 25%;
+}
+
+.doc-th-date {
+  width: 25%;
+}
+
+.doc-th-actions {
+  width: 15%;
   text-align: center;
   cursor: default;
 }
+
 .doc-th-actions:hover {
   color: #64748b;
   background: #f8fafc;
@@ -5360,6 +5377,22 @@ html {
   opacity: 1;
 }
 
+/* Keep actions visible when dropdown is open */
+.doc-row-actions:has(.doc-dropdown-menu) {
+  opacity: 1;
+}
+
+/* Fallback: keep row highlighted when dropdown wrapper is being interacted with */
+.doc-dropdown-wrapper:hover~.doc-row-actions,
+.doc-dropdown-wrapper:focus-within~.doc-row-actions {
+  opacity: 1;
+}
+
+/* Keep the entire row actions visible when hovering on dropdown */
+.doc-td-actions:hover .doc-row-actions {
+  opacity: 1;
+}
+
 .doc-action-btn {
   background: transparent;
   border: none;
@@ -5417,6 +5450,7 @@ html {
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -5496,9 +5530,17 @@ html {
     display: none;
   }
 
-  .doc-th-name { width: 45%; }
-  .doc-th-type { width: 35%; }
-  .doc-th-actions { width: 20%; }
+  .doc-th-name {
+    width: 45%;
+  }
+
+  .doc-th-type {
+    width: 35%;
+  }
+
+  .doc-th-actions {
+    width: 20%;
+  }
 
   .doc-name-cell {
     gap: 8px;
@@ -8464,7 +8506,7 @@ select:focus-visible {
   border-radius: 10px;
   min-width: 80px;
   text-align: center;
-  box-shadow: 
+  box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.1),
     0 10px 20px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -8495,7 +8537,7 @@ select:focus-visible {
   height: 8px;
   background: #d1d5db;
   border-radius: 50%;
-  box-shadow: 
+  box-shadow:
     calc(100% + 8px) 0 0 #d1d5db;
 }
 
