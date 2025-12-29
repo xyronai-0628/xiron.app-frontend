@@ -5420,9 +5420,9 @@ html {
   background: #d1fae5;
 }
 
-.doc-more-btn:hover {
-  color: #64748b;
-  background: #e2e8f0;
+.doc-delete-btn:hover {
+  color: #ef4444;
+  background: #fef2f2;
 }
 
 /* Dropdown */

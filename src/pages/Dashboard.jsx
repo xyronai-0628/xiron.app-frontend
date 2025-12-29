@@ -1601,57 +1601,18 @@ function Dashboard({ user }) {
                                                                 <path d="M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                                                             </svg>
                                                         </button>
-                                                        <div className="doc-dropdown-wrapper">
-                                                            <button
-                                                                className="doc-action-btn doc-more-btn"
-                                                                onClick={(e) => { e.stopPropagation(); toggleDropdown(doc.id); }}
-                                                                title="More actions"
-                                                            >
-                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                                                    <circle cx="12" cy="5" r="1.5" fill="currentColor" />
-                                                                    <circle cx="12" cy="12" r="1.5" fill="currentColor" />
-                                                                    <circle cx="12" cy="19" r="1.5" fill="currentColor" />
-                                                                </svg>
-                                                            </button>
-                                                            {activeDropdown === doc.id && (
-                                                                <div className="doc-dropdown-menu" onClick={(e) => e.stopPropagation()}>
-                                                                    <button className="doc-dropdown-item" onClick={() => { handleViewDocument(doc); setActiveDropdown(null); }}>
-                                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                                                            <path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z" stroke="currentColor" strokeWidth="2" />
-                                                                            <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
-                                                                        </svg>
-                                                                        View
-                                                                    </button>
-                                                                    <button className="doc-dropdown-item" onClick={() => handleDownloadFromDropdown(doc)}>
-                                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                                                            <path d="M21 15V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                                                            <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                                                            <path d="M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                                                        </svg>
-                                                                        Download
-                                                                    </button>
-                                                                    <button className="doc-dropdown-item" onClick={() => handleShare(doc)}>
-                                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                                                            <circle cx="18" cy="5" r="3" stroke="currentColor" strokeWidth="2" />
-                                                                            <circle cx="6" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
-                                                                            <circle cx="18" cy="19" r="3" stroke="currentColor" strokeWidth="2" />
-                                                                            <path d="M8.59 13.51L15.42 17.49" stroke="currentColor" strokeWidth="2" />
-                                                                            <path d="M15.41 6.51L8.59 10.49" stroke="currentColor" strokeWidth="2" />
-                                                                        </svg>
-                                                                        Share
-                                                                    </button>
-                                                                    <div className="doc-dropdown-divider"></div>
-                                                                    <button className="doc-dropdown-item doc-dropdown-item-danger" onClick={(e) => { handleDeleteDocument(e, doc); setActiveDropdown(null); }}>
-                                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                                                            <path d="M3 6H5H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                                                            <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                                                        </svg>
-                                                                        Delete
-                                                                    </button>
-                                                                </div>
-                                                            )}
-                                                        </div>
+                                                        <button
+                                                            className="doc-action-btn doc-delete-btn"
+                                                            onClick={(e) => { e.stopPropagation(); handleDeleteDocument(e, doc); }}
+                                                            title="Delete"
+                                                        >
+                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M3 6H5H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                                <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                                            </svg>
+                                                        </button>
                                                     </div>
+
                                                 </td>
                                             </tr>
                                         ))}
