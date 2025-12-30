@@ -1254,10 +1254,12 @@ function Dashboard({ user }) {
                                         </svg>
                                     )}
                                 </div>
-                                <div className="tool-count">
-                                    {documents.filter(doc => doc.toolId === tool.id).length}
+                                <div className="tool-count-wrapper">
+                                    <div className="tool-count">
+                                        {documents.filter(doc => doc.toolId === tool.id).length}
+                                    </div>
+                                    <div className="tool-count-label">Documents</div>
                                 </div>
-                                <div className="tool-count-label">Documents</div>
                             </div>
 
                             <div className="tool-content">
@@ -1290,16 +1292,16 @@ function Dashboard({ user }) {
                     ))}
                 </div>
 
-                {/* Developer Bundle Section */}
+                {/* Developer Bundle Section - Premium Design */}
                 <div className="developer-bundle-section">
                     <div className="bundle-header">
                         <div className="bundle-header-content">
-                            <h2 className="bundle-title">Generate all documents together - architecture, flows, schemas & PRD</h2>
+                            <h2 className="bundle-title">Generate all documents together</h2>
                             <p className="bundle-description">
-                                Get a complete documentation package with system architecture, user flows, database schemas, and PRD in one go. Save time and ensure consistency across all your project documentation.
+                                Get a complete documentation package with system architecture, user flows, database schemas, and PRD in one go.
                             </p>
                         </div>
-                        <div className="bundle-badge">Documents</div>
+                        <div className="bundle-badge">Bundle Package</div>
                     </div>
 
                     <div className="bundle-content">
