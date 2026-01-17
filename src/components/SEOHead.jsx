@@ -31,16 +31,16 @@ function SEOHead({
 }) {
   const siteName = 'Xiron'
   const twitterHandle = '@xiron_ai'
-  
+
   // Get base URL from environment or window location
-  const baseUrl = typeof window !== 'undefined' 
-    ? window.location.origin 
+  const baseUrl = typeof window !== 'undefined'
+    ? window.location.origin
     : 'https://xiron.app'
-  
-  const fullCanonicalUrl = canonicalUrl 
+
+  const fullCanonicalUrl = canonicalUrl
     ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`)
     : (typeof window !== 'undefined' ? window.location.href : baseUrl)
-  
+
   const fullOgImage = ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`
 
   useEffect(() => {
@@ -50,12 +50,12 @@ function SEOHead({
     // Helper to update or create meta tags
     const setMetaTag = (name, content, property = false) => {
       if (!content) return
-      
-      const selector = property 
-        ? `meta[property="${name}"]` 
+
+      const selector = property
+        ? `meta[property="${name}"]`
         : `meta[name="${name}"]`
       let tag = document.querySelector(selector)
-      
+
       if (!tag) {
         tag = document.createElement('meta')
         if (property) {
@@ -71,7 +71,7 @@ function SEOHead({
     // Helper to update or create link tags
     const setLinkTag = (rel, href) => {
       if (!href) return
-      
+
       let tag = document.querySelector(`link[rel="${rel}"]`)
       if (!tag) {
         tag = document.createElement('link')
@@ -87,7 +87,7 @@ function SEOHead({
     if (keywords.length > 0) {
       setMetaTag('keywords', keywords.join(', '))
     }
-    
+
     // Robots
     setMetaTag('robots', noindex ? 'noindex, nofollow' : 'index, follow')
 
@@ -102,7 +102,7 @@ function SEOHead({
     setMetaTag('og:type', ogType, true)
     setMetaTag('og:site_name', siteName, true)
     setMetaTag('og:locale', 'en_US', true)
-    
+
     if (publishedTime) {
       setMetaTag('article:published_time', publishedTime, true)
     }
